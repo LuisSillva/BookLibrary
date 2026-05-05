@@ -1,6 +1,6 @@
-# Task Manager — Full Stack App
+# Book Library — Full Stack App
 
-A full stack Task Manager built with **FastAPI** (backend) and **React** (frontend), created as a learning project to study REST APIs, FastAPI, and how frontends communicate with backends.
+A full stack Book Library built with **FastAPI** (backend) and **React** (frontend), created as a learning project to study REST APIs, FastAPI, and how frontends communicate with backends. This one was made entirely by myself, seeing just my old notepads from the Task Manager projects, documentation and my old code. 
 
 ---
 
@@ -19,22 +19,22 @@ A full stack Task Manager built with **FastAPI** (backend) and **React** (fronte
 ## Project Structure
 
 ```
-TaskManager/
-├── task-manager-api/          # Backend
+BookLibrary/
+├── book-library-api/          # Backend
 │   ├── app/
 │   │   ├── main.py            # App entry point
 │   │   ├── database.py        # Database connection
 │   │   ├── routers/
-│   │   │   └── tasks.py       # Task endpoints
+│   │   │   └── books.py       # Task endpoints
 │   │   ├── models/
-│   │   │   └── task.py        # SQLAlchemy model
+│   │   │   └── book.py        # SQLAlchemy model
 │   │   └── schemas/
-│   │       └── task.py        # Pydantic schemas
+│   │       └── book.py        # Pydantic schemas
 │   ├── data/
-│   │   └── tasks.db           # SQLite database
+│   │   └── books.db           # SQLite database
 │   └── requirements.txt
 │
-└── task-manager-ui/           # Frontend
+└── book-library-ui/           # Frontend
     ├── src/
     │   └── App.jsx            # Main React component
     └── package.json
@@ -54,7 +54,7 @@ TaskManager/
 
 ```bash
 # 1. Navigate to the backend folder
-cd task-manager-api
+cd book-library-api
 
 # 2. Create and activate virtual environment
 python -m venv venv
@@ -80,7 +80,7 @@ Interactive docs available at `http://localhost:8000/docs`
 
 ```bash
 # 1. Navigate to the frontend folder
-cd task-manager-ui
+cd book-library-ui
 
 # 2. Install dependencies
 npm install
@@ -99,64 +99,69 @@ Frontend runs at `http://localhost:5173`
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `GET` | `/tasks` | Get all tasks |
-| `GET` | `/tasks/{id}` | Get a single task |
-| `POST` | `/tasks` | Create a new task |
-| `PUT` | `/tasks/{id}` | Update a task |
-| `DELETE` | `/tasks/{id}` | Delete a task |
+| `GET` | `/books` | Get all books |
+| `GET` | `/books/{id}` | Get a single book |
+| `POST` | `/books` | Create a new book |
+| `PUT` | `/books/{id}` | Update a book |
+| `DELETE` | `/books/{id}` | Delete a book |
 
-### Query Parameters — `GET /tasks`
+### Query Parameters — `GET /books`
 
 | Parameter | Type | Description |
 |---|---|---|
-| `done` | `bool` | Filter by completion status |
-| `search` | `string` | Search by title |
+| `read` | `bool` | Filter by read status |
+| `search` | `string` | Search by title or author |
 | `skip` | `int` | Pagination offset (default: 0) |
 | `limit` | `int` | Pagination limit (default: 10) |
 
 **Examples:**
 ```
-GET /tasks?done=false
-GET /tasks?search=learn
-GET /tasks?skip=0&limit=5
-GET /tasks?search=learn&done=false
+GET /books?read=false
+GET /books?search=learn
+GET /books?skip=0&limit=5
+GET /books?search=learn&read=false
 ```
 
 ---
 
 ### Request & Response Examples
 
-**Create a task**
+**Create a book**
 ```http
-POST /tasks
+POST /books
 Content-Type: application/json
 
 {
-  "title": "Learn FastAPI"
+  "title": "Clean Code",
+  "author": "Robert C. Martin",
 }
 ```
 ```json
 {
   "id": 1,
-  "title": "Learn FastAPI",
-  "done": false
+  "title": "Clean Code",
+  "description": "This book doesn't have a description yet.",
+  "author": "Robert C. Martin",
+  "read": false
 }
 ```
 
-**Update a task**
+**Update a book**
 ```http
-PUT /tasks/1
+PUT /books/1
 Content-Type: application/json
 
 {
-  "done": true
+  "read": true
 }
 ```
 ```json
 {
   "id": 1,
-  "title": "Learn FastAPI",
-  "done": true
+  "title": "Clean Code",
+  "description": "This book doesn't have a description yet.",
+  "author": "Robert C. Martin",
+  "read": true
 }
 ```
 
@@ -177,7 +182,6 @@ Content-Type: application/json
 ## Possible Next Steps
 
 - [ ] User authentication with JWT tokens
-- [ ] Task due dates and priorities
 - [ ] Deploy backend
 - [ ] Deploy frontend
 
