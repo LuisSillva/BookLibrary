@@ -8,4 +8,4 @@ class Book(Base):
     title = Column(String, nullable=False, index=True)
     description = Column(String, nullable=True, default="This book doesn't have a description yet.")
     author = Column(String, nullable=False)
-    done = Column(Boolean, default=False)
+    read = Column(Boolean, default=False)

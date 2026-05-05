@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent().parent()
+BASE_DIR = Path(__file__).resolve().parent.parent
 DATABASE_DIR = BASE_DIR / "data"
 DATABASE_DIR.mkdir(exist_ok=True)
 SQLALCHEMY_DATABASE_URL = f"sqlite:///{DATABASE_DIR}/tasks.db"
